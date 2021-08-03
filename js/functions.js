@@ -1,0 +1,3 @@
+function clearMessages(){
+	titleList.innerHTML = '';
+}
