@@ -39,12 +39,14 @@ function titleClickHandler(event){
   /* add class 'active' to the correct article */
 
   targetArticle.classList.add('active');
+
 }
 
 const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
-  optArticleTagsSelector = '.post-tags .list';
+  optArticleTagsSelector = '.post-tags .list',
+  optArticleAuthorSelector = '.post-author';
 
 function generateTitleLinks(customSelector = ''){
 
@@ -145,34 +147,61 @@ function tagClickHandler(event){
   /* make a new constant "tag" and extract tag from the "href" constant */
   const tag = href.replace('#tag-', '');
   /* find all tag links with class active */
-  const articleTags = article.querySelectorAll('a.active[href^="#tag-"]');
+  const articleTags = document.querySelectorAll('a.active[href^="#tag-"]');
   /* START LOOP: for each active tag link */
   for(let articleTag of articleTags){
     /* remove class active */
-    articleTags.classList.remove('active');
+    articleTag.classList.remove('active');
   /* END LOOP: for each active tag link */
 }
   /* find all tag links with "href" attribute equal to the "href" constant */
   const articles = document.querySelectorAll('a[href="' + href + '"]');
   /* START LOOP: for each found tag link */
-  for(let articleTag of articleTags){
+  for(let article of articles){
     /* add class active */
-    articleTags.classList.add('active');
+    article.classList.add('active');
   /* END LOOP: for each found tag link */
 }
   /* execute function "generateTitleLinks" with article selector as argument */
+generateTitleLinks('[data-tags~="' + tag + '"]');
 }
 
 function addClickListenersToTags(){
   /* find all links to tags */
-  let links = document.querySelectorAll('.post-tags .list');
+  let links = document.querySelectorAll('a[href^="#tag-"]');
+
   /* START LOOP: for each link */
   for(let link of links){
 
     /* add tagClickHandler as event listener for that link */
     link.addEventListener('click', tagClickHandler);
+
   /* END LOOP: for each link */
 }
-}
 
+}
 addClickListenersToTags();
+
+function generateAuthors() {
+  /* find all articles */
+
+  const articles = document.querySelectorAll(optArticleSelector);
+
+  /* START LOOP: for every article: */
+  for(let article of articles){
+    /* find authors wrapper */
+    const authorWrapper = article.querySelector(optArticleAuthorSelector);
+    console.log(authorWrapper);
+    /* make html variable with empty string */
+    let html = '';
+    
+    const articleAuthors = article.getAttribute('data-author');
+    console.log(articleAuthors);
+    const linkHTML = '<li><a href="#author-' + articleAuthors + '"><span>' + articleAuthors + '</span></a></li>';
+    /* add generated code to html variable */
+    html = html + linkHTML;
+    authorWrapper.innerHTML = html;
+    console.log(authorWrapper);
+  }
+}
+generateAuthors();
