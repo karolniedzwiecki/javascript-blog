@@ -113,7 +113,7 @@ body {
 }
 
 /* Tag Cloud */
-.tags li {
+.list-tags li {
   display: inline-block;
 }
 
