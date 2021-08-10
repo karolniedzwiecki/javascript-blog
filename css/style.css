@@ -113,7 +113,7 @@ body {
 }
 
 /* Tag Cloud */
-.list-tags li {
+.list .tags li {
   display: inline-block;
 }
 
@@ -129,12 +129,12 @@ body {
 
 .tag-size-3 {
   font-size: 140%;
-  color: yellow;
+  color: purple;
 }
 
 .tag-size-4 {
   font-size: 160%;
-  color: purple;
+  color: orange;
 }
 
 .tag-size-5 {
